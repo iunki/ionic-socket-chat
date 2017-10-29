@@ -1,0 +1,50 @@
+<!--
+  Generated template for the ChatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>chat</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  {{nickname}}
+  <ion-grid>
+    <ion-row *ngFor="let message of messages">
+
+      <ion-col col-9 *ngIf="message.from !== nickname" class="message" [ngClass]="{'my_message': message.from === nickname, 'other_message': message.from !== nickname}">
+        <span class="user_name">{{ message.from }}:</span><br>
+        <span>{{ message.text }}</span>
+        <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div>
+      </ion-col>
+
+      <ion-col offset-3 col-9 *ngIf="message.from === nickname" class="message" [ngClass]="{'my_message': message.from === nickname, 'other_message': message.from !== nickname}">
+        <span class="user_name">{{ message.from }}:</span><br>
+        <span>{{ message.text }}</span>
+        <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-row>
+    <ion-col col-9>
+      <ion-input [(ngModel)]="message"></ion-input>
+    </ion-col>
+    <ion-col col-3 text-right>
+      <button ion-button icon-only (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
